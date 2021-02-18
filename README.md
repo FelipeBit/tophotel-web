@@ -5,10 +5,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Available Scripts
 
 <div>
-  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img1.jpg" alt="mobile app screenshot" width="50%"/>
-  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img2.jpg" alt="mobile app screenshot" width="50%"/>
-  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img3.jpg" alt="mobile app screenshot" width="50%"/>
-  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img4.png" alt="mobile app screenshot" width="50%"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img1.jpg" alt="mobile app screenshot" width="100%"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img2.jpg" alt="mobile app screenshot" width="100%"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img3.jpg" alt="mobile app screenshot" width="100%"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img4.png" alt="mobile app screenshot" width="100%"/>
 </div>
 
 ### `yarn start`
