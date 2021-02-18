@@ -19,6 +19,7 @@ import Text from '../../components/Text'
 import Button from '../../components/Button'
 import Grid2Columns from '../../components/Grid2Columns'
 import Grid1Column from '../../components/Grid1Column'
+import HorizontalOfferCard from '../../components/HorizontalOfferCard'
 
 interface Hotel {
     info: {
@@ -44,31 +45,46 @@ interface Hotel {
 
 }
 
-interface Weather {
-    weather: [
-        {
-            WeatherText: string,
-            WeatherIcon: number,
-            Temperature: {
-                Metric: {
-                    Value: string
-                }
-            },
-            RealFeelTemperature: {
-                Metric: {
-                    value: string
-                }
-            },
-            Link: string
-
+interface Offer {
+    id: string,
+    room: {
+        typeEstimated: {
+            category: string,
+            beds: number,
+            bedType: string
+        },
+        description: {
+            text: string
         }
-    ]
+    },
+    price: {
+        currency: string,
+        total: string
+    }
+}
+
+interface Weather {
+    WeatherText: string,
+    WeatherIcon: number,
+    Temperature: {
+        Metric: {
+            Value: string
+        }
+    },
+    RealFeelTemperature: {
+        Metric: {
+            value: string
+        }
+    },
+    Link: string
+
 }
 
 function Hotel(props: any) {
     const [isLoading, setIsLoading] = useState(true)
     const [hotel, setHotel] = useState<Hotel | any>('')
     const [weather, setWeather] = useState<Weather | any>('')
+    const [offers, setOffers] = useState<Offer | any>([])
 
     useEffect(() => {
 
@@ -76,7 +92,29 @@ function Hotel(props: any) {
             .then(function (response) {
 
                 setHotel(response.data)
-                console.log(response.data)
+
+                const hotelOffers = response.data.info.offers.map((offer: Offer) => {
+                    return ({
+                        id: offer.id,
+                        room: {
+                            typeEstimated: {
+                                category: offer.room.typeEstimated.category,
+                                beds: offer.room.typeEstimated.beds,
+                                bedType: offer.room.typeEstimated.bedType
+                            },
+                            description: {
+                                text: offer.room.description.text
+                            }
+                        },
+                        price: {
+                            currency: offer.price.currency,
+                            total: offer.price.total
+                        }
+                    })
+
+                })
+
+                setOffers(hotelOffers)
 
                 api.get(`weather/`, {
                     params: {
@@ -86,9 +124,7 @@ function Hotel(props: any) {
                 })
                     .then(function (response) {
 
-                        console.log(response.data)
-
-                        //setWeather(response.data)
+                        setWeather(response.data)
 
                     })
                     .catch(function (error) {
@@ -138,22 +174,40 @@ function Hotel(props: any) {
                                     edit={false}
                                 />
                             </Grid2Columns>
-                            <Grid1Column>
-                                <div style={{ width: '100%', textAlign: 'center' }}>
-                                    <Button onClick={handleClick} isLoading={isLoading}>Reserve Now</Button>
-                                </div>
-                            </Grid1Column>
                             <SubTitle>Description</SubTitle>
                             <TextBox>{hotel.info.hotel.description.text}</TextBox>
                             {weather ? (
                                 <section>
                                     <SubTitle>Current weather</SubTitle>
-                                    <Text>Weather: {weather.weather[0]?.WeatherText}</Text>
+                                    <Text>Weather: {weather?.weather[0]?.WeatherText}</Text>
                                     <Text>Temperature: {weather?.weather[0]?.Temperature?.Metric?.Value} °C</Text>
                                     <Text>Real Feel Temperature: {weather?.weather[0]?.RealFeelTemperature?.Metric?.Value} °C</Text>
                                     <Text>More info: {weather?.weather[0]?.Link}</Text>
                                 </section>
-                            ) : null
+                            ) : <SubTitle>Current weather (API reachead max requests)</SubTitle>
+                            }
+
+                            {offers ? (
+                                <section >
+                                    <SubTitle>Special Offers</SubTitle>
+                                    <Grid1Column>
+                                        {
+                                            offers.map((offer: Offer) => (
+                                                <HorizontalOfferCard
+                                                    id={''}
+                                                    image={''}
+                                                    category={offer.room.typeEstimated.category}
+                                                    beds={offer.room.typeEstimated.beds}
+                                                    bedType={offer.room.typeEstimated.bedType}
+                                                    text={offer.room.description.text}
+                                                    currency={offer.price.currency}
+                                                    total={offer.price.total}
+                                                />
+                                            ))
+                                        }
+                                    </Grid1Column>
+
+                                </section >) : null
                             }
                             <section>
                                 <SubTitle>Contact</SubTitle>
