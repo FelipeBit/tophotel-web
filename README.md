@@ -4,7 +4,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+<div>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img1.jpg" alt="mobile app screenshot" width="280"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img2.jpg" alt="mobile app screenshot" width="280"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img3.jpg" alt="mobile app screenshot" width="280"/>
+  <img src="https://github.com/FelipeBit/tophotel-web/blob/main/src/assets/img4.jpg" alt="mobile app screenshot" width="280"/>
+</div>
 
 ### `yarn start`
 
