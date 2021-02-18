@@ -40,7 +40,11 @@ interface Hotel {
                 uri: string
             }]
         }
-    },
+    }
+
+}
+
+interface Weather {
     weather: [
         {
             WeatherText: string,
@@ -61,12 +65,10 @@ interface Hotel {
     ]
 }
 
-interface Props {
-    id: string
-}
 function Hotel(props: any) {
     const [isLoading, setIsLoading] = useState(true)
     const [hotel, setHotel] = useState<Hotel | any>('')
+    const [weather, setWeather] = useState<Weather | any>('')
 
     useEffect(() => {
 
@@ -74,8 +76,27 @@ function Hotel(props: any) {
             .then(function (response) {
 
                 setHotel(response.data)
-
                 console.log(response.data)
+
+                api.get(`weather/`, {
+                    params: {
+                        latitude: response.data.info.hotel.latitude,
+                        longitude: response.data.info.hotel.longitude
+                    }
+                })
+                    .then(function (response) {
+
+                        console.log(response.data)
+
+                        //setWeather(response.data)
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    }).finally(() => {
+                        setIsLoading(false)
+                    })
+
 
             })
             .catch(function (error) {
@@ -124,13 +145,16 @@ function Hotel(props: any) {
                             </Grid1Column>
                             <SubTitle>Description</SubTitle>
                             <TextBox>{hotel.info.hotel.description.text}</TextBox>
-                            <section>
-                                <SubTitle>Current weather</SubTitle>
-                                <Text>Weather: {hotel?.weather[0]?.WeatherText}</Text>
-                                <Text>Temperature: {hotel?.weather[0]?.Temperature?.Metric?.Value} °C</Text>
-                                <Text>Real Feel Temperature: {hotel?.weather[0]?.RealFeelTemperature?.Metric?.Value} °C</Text>
-                                <Text>More info: {hotel?.weather[0]?.Link}</Text>
-                            </section>
+                            {weather ? (
+                                <section>
+                                    <SubTitle>Current weather</SubTitle>
+                                    <Text>Weather: {weather.weather[0]?.WeatherText}</Text>
+                                    <Text>Temperature: {weather?.weather[0]?.Temperature?.Metric?.Value} °C</Text>
+                                    <Text>Real Feel Temperature: {weather?.weather[0]?.RealFeelTemperature?.Metric?.Value} °C</Text>
+                                    <Text>More info: {weather?.weather[0]?.Link}</Text>
+                                </section>
+                            ) : null
+                            }
                             <section>
                                 <SubTitle>Contact</SubTitle>
                                 <Text>Phone: {hotel.info.hotel.contact.phone}</Text>
