@@ -2,12 +2,12 @@
 
 This project was made with the followings technologies:
 
-* Typescript
-* React
+- Typescript
+- React
 
-* APIs
-** Amadeus (to retrieve the hotels info): https://developers.amadeus.com/self-service/category/hotel
-** Accuweather (to retrieve weather info): https://developer.accuweather.com/apis
+- APIs:
+  * Amadeus (to retrieve the hotels info): https://developers.amadeus.com/self-service/category/hotel
+  * Accuweather (to retrieve weather info): https://developer.accuweather.com/apis
 
 
 ## Web App screenshots
