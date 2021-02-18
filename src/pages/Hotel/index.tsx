@@ -40,7 +40,25 @@ interface Hotel {
                 uri: string
             }]
         }
-    }
+    },
+    weather: [
+        {
+            WeatherText: string,
+            WeatherIcon: number,
+            Temperature: {
+                Metric: {
+                    Value: string
+                }
+            },
+            RealFeelTemperature: {
+                Metric: {
+                    value: string
+                }
+            },
+            Link: string
+
+        }
+    ]
 }
 
 interface Props {
@@ -56,6 +74,8 @@ function Hotel(props: any) {
             .then(function (response) {
 
                 setHotel(response.data)
+
+                console.log(response.data)
 
             })
             .catch(function (error) {
@@ -90,7 +110,7 @@ function Hotel(props: any) {
                                 <p style={{ textAlign: 'right', marginTop: '5px', fontWeight: 'bold', fontSize: '24px', color: '#00077F' }} >Classification:</p>
                                 <ReactStars
                                     count={5}
-                                    value={hotel.info.hotel.rating}
+                                    value={Number(hotel.info.hotel.rating)}
                                     half={false}
                                     size={32}
                                     color2={'#ffd700'}
@@ -104,6 +124,13 @@ function Hotel(props: any) {
                             </Grid1Column>
                             <SubTitle>Description</SubTitle>
                             <TextBox>{hotel.info.hotel.description.text}</TextBox>
+                            <section>
+                                <SubTitle>Current weather</SubTitle>
+                                <Text>Weather: {hotel?.weather[0]?.WeatherText}</Text>
+                                <Text>Temperature: {hotel?.weather[0]?.Temperature?.Metric?.Value} °C</Text>
+                                <Text>Real Feel Temperature: {hotel?.weather[0]?.RealFeelTemperature?.Metric?.Value} °C</Text>
+                                <Text>More info: {hotel?.weather[0]?.Link}</Text>
+                            </section>
                             <section>
                                 <SubTitle>Contact</SubTitle>
                                 <Text>Phone: {hotel.info.hotel.contact.phone}</Text>
