@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const SCard = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  height: 250px;
+  height: 350px;
   width: 100%;
   border-radius: 5px;
   border: 1px solid;
@@ -35,6 +35,6 @@ export const STitle = styled.p`
 
 export const SText = styled.p`
     font-size: 14px;
-    height: 110px;
+    height: 200px;
     color: #00077F;
 `;

@@ -20,7 +20,7 @@ function Card(props: Props) {
             <SImage style={{ backgroundImage: `url(${props.image})` }} />
             <SInfo>
                 <STitle>{props.title}</STitle>
-                <SText>{props.description}</SText>
+                <SText>{props.description.length > 800 ? (props.description.substring(0, 800) + '...') : props.description}</SText>
                 <ReactStars
                     count={5}
                     value={props.rating}

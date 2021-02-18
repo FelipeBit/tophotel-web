@@ -153,10 +153,6 @@ function Home() {
                 toast.error('Unexpected error!');
                 console.log(error);
             }).finally(() => {
-                console.log(hotels)
-                if (!hotelsFounded) {
-                    toast.warning('Hotels not founded!');
-                }
                 setIsLoading(false)
             })
     }
