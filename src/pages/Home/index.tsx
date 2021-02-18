@@ -60,8 +60,6 @@ function Home() {
 
         api.get('countries')
             .then(function (response) {
-                console.log(response.data)
-
                 const countriesResult = response.data.map((country: Country) => {
                     return (
                         {
@@ -72,7 +70,6 @@ function Home() {
                 })
 
                 setCountries(countriesResult)
-                console.log('Set countries =>', countriesResult)
 
                 api.get('cities')
                     .then(function (response) {
@@ -116,8 +113,6 @@ function Home() {
         }
 
         setHotelRatings(ratingArray)
-
-        console.log('rating Array => ', ratingArray)
     }
 
 
@@ -143,7 +138,6 @@ function Home() {
         })
             .then(function (response) {
                 const hotelsResponse = response.data.data
-                console.log(hotelsResponse)
                 if (hotelsResponse.lenght > 0) {
                     hotelsFounded = true
                 }
