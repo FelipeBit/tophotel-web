@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 import Select from 'react-select'
 import ReactStars from 'react-stars'
 import { ToastContainer, toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 import api from '../../services/api'
